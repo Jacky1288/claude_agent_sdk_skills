@@ -52,11 +52,10 @@ async def main():
         setting_sources=["user", "project"],
         mcp_servers={
             "notion": {
+                "type": "stdio",
                 "command": "npx",
                 "args": ["-y", "@notionhq/notion-mcp-server"],
-                "env": {
-                    "NOTION_TOKEN": NOTION_TOKEN,
-                },
+                **({"env": {"NOTION_TOKEN": NOTION_TOKEN}} if NOTION_TOKEN else {}),
             }
         },
         allowed_tools=["Skill", "Task", "Write", "Bash", "WebSearch", "WebFetch", 
